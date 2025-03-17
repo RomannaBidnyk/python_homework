@@ -146,3 +146,21 @@ def student_scores(operation, **kwargs):
 print("\nTask 7")
 print(student_scores("mean", Tom=75, Dick=89, Angela=91))
 print(student_scores("best", Tom=75, Dick=89, Angela=91, Frank=50))
+
+
+# Task 8
+def titleize(sentence):
+    little_words = ["a", "on", "an", "the", "of", "and", "is", "in"]
+    words = sentence.split()
+    for i, word in enumerate(words):
+        if i == 0 or i == len(words) - 1:
+            words[i] = word.capitalize()
+        elif word not in little_words:
+            words[i] = word.capitalize()
+
+    return " ".join(words)
+
+
+print("\nTask 8")
+print(titleize("after and on"))
+print(titleize("a separate peace"))
