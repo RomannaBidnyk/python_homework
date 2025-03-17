@@ -164,3 +164,18 @@ def titleize(sentence):
 print("\nTask 8")
 print(titleize("after and on"))
 print(titleize("a separate peace"))
+
+
+# Task 9
+def hangman(secret, guess):
+    result = ""
+    for letter in secret:
+        if letter not in guess:
+            result += "_"
+        else:
+            result += letter
+    return result
+
+
+print("\nTask 9")
+print(hangman("difficulty", "ic"))
