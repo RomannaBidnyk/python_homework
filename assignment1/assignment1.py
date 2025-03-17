@@ -3,6 +3,7 @@ def hello():
     return "Hello!"
 
 
+print("\nTask 1")
 print(hello())
 
 
@@ -11,6 +12,7 @@ def greet(name):
     return "Hello, " + name + "!"
 
 
+print("\nTask 2")
 print(greet("James"))
 
 
@@ -66,6 +68,7 @@ def calc(a, b, operation="multiply"):
         return f"You can't {operation} those values!"
 
 
+print("\nTask 3")
 print(calc(5, 6, "add"))
 
 
@@ -85,4 +88,61 @@ def data_type_conversion(value, type_name):
         return f"You can't convert {value} into a {type_name}."
 
 
+print("\nTask 4")
 print(data_type_conversion("5.5", "float"))
+
+
+# Task 5
+def grade(*args):
+    try:
+        average = sum(args) / len(args)
+    except (TypeError, ZeroDivisionError):
+        return "Invalid data was provided."
+
+    if average >= 90:
+        return "A"
+    elif average >= 80 and average <= 89:
+        return "B"
+    elif average >= 70 and average <= 79:
+        return "C"
+    elif average >= 60 and average <= 69:
+        return "D"
+    else:
+        return "F"
+
+
+print("\nTask 5")
+print(grade(75, 85, 95))
+print(grade("three", "blind", "mice"))
+print(grade())
+
+
+# Task 6
+def repeat(words, count):
+    result = ""
+    for _ in range(count):
+        result += words
+    return result
+
+
+print("\nTask 6")
+print(repeat("up,", 4))
+
+
+# Task 7
+def student_scores(operation, **kwargs):
+    if operation == "mean":
+        return sum(kwargs.values()) / len(kwargs)
+    elif operation == "best":
+        max = 0
+        name = ""
+        for key, value in kwargs.items():
+            if value > max:
+                max = value
+                name = key
+        return name
+
+
+print("\nTask 7")
+print(student_scores("mean", Tom=75, Dick=89, Angela=91))
+print(student_scores("best", Tom=75, Dick=89, Angela=91, Frank=50))
