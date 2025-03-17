@@ -179,3 +179,40 @@ def hangman(secret, guess):
 
 print("\nTask 9")
 print(hangman("difficulty", "ic"))
+
+
+# Task 10
+def pig_latin(sentence):
+    words = sentence.split()
+    changed_words = []
+    for word in words:
+        changed_words.append(change_one_word(word))
+    return " ".join(changed_words)
+
+
+def change_one_word(word):
+    vowel = "aeiou"
+
+    if word[0] in vowel:
+        return word + "ay"
+
+    count_consonants = 0
+    for _ in word:
+        if _ not in vowel:
+            count_consonants += 1
+        else:
+            break
+
+    if word[count_consonants - 1] == "q" and word[count_consonants] == "u":
+        return word[count_consonants + 1 :] + word[: count_consonants + 1] + "ay"
+    else:
+        return word[count_consonants:] + word[:count_consonants] + "ay"
+
+
+print("\nTask 10")
+print(pig_latin("apple"))
+print(pig_latin("banana"))
+print(pig_latin("cherry"))
+print(pig_latin("quiet"))
+print(pig_latin("square"))
+print(pig_latin("the quick brown fox"))
