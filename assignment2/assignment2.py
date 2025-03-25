@@ -79,3 +79,38 @@ def employee_find_2(employee_id):
 
 
 print(employee_find(15))
+
+# Task 7
+print("\nTask 7")
+
+
+def sort_by_last_name():
+    last_name_col = column_index("last_name")
+    employees["rows"].sort(key=lambda row: row[last_name_col])
+    return employees["rows"]
+
+
+print(sort_by_last_name())
+
+# Task 8
+print("\nTask 8")
+
+# version 1
+# def employee_dict(row):
+#     employee_data = {}
+
+#     for i, field in enumerate(employees["fields"]):
+#         if field != "employee_id":
+#             employee_data[field] = row[i]
+#     return employee_data
+
+
+# version 2
+def employee_dict(row):
+    zipped_data = zip(employees["fields"], row)
+    employee_data = dict(zipped_data)
+    employee_data.pop("employee_id", None)
+    return employee_data
+
+
+print(employee_dict(employees["rows"][0]))
