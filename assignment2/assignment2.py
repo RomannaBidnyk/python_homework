@@ -1,4 +1,7 @@
 import csv
+import os
+import custom_module
+from datetime import datetime
 
 # Task 2
 print("\nTask 2")
@@ -114,3 +117,111 @@ def employee_dict(row):
 
 
 print(employee_dict(employees["rows"][0]))
+
+# Task 9
+print("\nTask 9")
+
+
+def all_employees_dict():
+    all_employees = {}
+    for row in employees["rows"]:
+        all_employees[row[employee_id_column]] = employee_dict(row)
+    return all_employees
+
+
+print(all_employees_dict())
+
+# Task 10
+print("\nTask 10")
+
+
+def get_this_value():
+    return os.getenv("THISVALUE")
+
+
+print(get_this_value())
+
+
+# Task 11
+print("\nTask 11")
+
+
+def set_that_secret(new_secret):
+    custom_module.set_secret(new_secret)
+
+
+set_that_secret("very_secret_secret")
+print(custom_module.secret)
+
+# Task 12
+print("\nTask 12")
+
+
+def read_minutes():
+    minutes1 = read_minutes_from_csv("../csv/minutes1.csv")
+    minutes2 = read_minutes_from_csv("../csv/minutes2.csv")
+    return minutes1, minutes2
+
+
+def read_minutes_from_csv(filepath):
+    try:
+        with open(filepath, "r") as file:
+            reader = csv.DictReader(file)
+            fields = reader.fieldnames
+            rows = [tuple(row.values()) for row in reader]
+            return {"fields": fields, "rows": rows}
+    except Exception as e:
+        print("An exception occurred:", e)
+
+
+minutes1, minutes2 = read_minutes()
+print(f"\nminutes1: {minutes1}")
+print(f"\nminutes2: {minutes2}")
+
+# Task 13
+print("\nTask 13")
+
+
+def create_minutes_set():
+    set1 = set(minutes1["rows"])
+    set2 = set(minutes2["rows"])
+    return set1.union(set2)
+
+
+minutes_set = create_minutes_set()
+print(f"minutes_set: {minutes_set}")
+
+# Task 14
+print("\nTask 14")
+
+
+def create_minutes_list():
+    minutes_list_raw = list(minutes_set)
+    converted_list = list(
+        map(lambda x: (x[0], datetime.strptime(x[1], "%B %d, %Y")), minutes_list_raw)
+    )
+    return converted_list
+
+
+minutes_list = create_minutes_list()
+
+print(f"minutes list: {minutes_list}")
+
+# Task 15
+print("\nTask 15")
+
+
+def write_sorted_list():
+    sorted_list = sorted(minutes_list, key=lambda x: x[1])
+    converted_list = list(
+        map(lambda x: (x[0], x[1].strftime("%B %d, %Y")), sorted_list)
+    )
+    with open("./minutes.csv", "w", newline="") as file:
+        writer = csv.writer(file)
+        writer.writerow(minutes1["fields"])
+        writer.writerows(converted_list)
+
+    return converted_list
+
+
+print(write_sorted_list())
